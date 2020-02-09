@@ -89,3 +89,152 @@ function myReplace(str, before, after) {
 }
 
 myReplace("A quick brown fox jumped over the lazy dog", "Jumped", "leaped");
+
+
+//function instrucions.The DNA strand is missing the pairing element. Take each character, get its pair, and return the results as a 2d array.
+function pairElement(str) {
+  let arr = str.split('');
+  let newArr = []
+  //console.log(arr)
+  for (let i = 0; i < arr.length; i++){
+    if(arr[i] == 'G'){
+      newArr.push(['G', 'C']);  
+    } else if (arr[i] == 'C'){
+      newArr.push(['C', 'G']);
+    } else if (arr[i] == 'A'){
+      newArr.push(['A', 'T']);
+    } else if (arr[i] == 'T'){
+      newArr.push(['T', 'A']);
+    }
+  }
+  return newArr
+}
+
+pairElement("ATCGA");
+
+
+
+//function instructions. Find the missing letter in the passed letter range and return it. If all letters are present in the range, return undefined.
+
+If all letters are present in the range, return undefined.
+function fearNotLetter(str) {
+  let num = str.charCodeAt(0)
+  for (let i = 0; i < str.length; i++){
+    if(str.charCodeAt(i) != num){
+      return String.fromCharCode(num)  
+    }
+    num++
+  }
+
+  return undefined;
+}
+
+fearNotLetter("abce");
+
+
+//function instructions. Write a function that takes two or more arrays and returns a new array of unique values in the order of the original provided arrays.
+function uniteUnique(arr) {
+  let args = Array.prototype.slice.call(arguments)
+  for (let i = 0; i < args.length; i++){
+    for (let j = 0; j < args[i].length; j++){
+      if (arr.indexOf(args[i][j]) < 0){
+        arr.push(args[i][j])
+      }
+    }
+  }
+  return arr;
+}
+
+uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]);
+
+
+//function instructions. Convert the characters &, <, >, " (double quote), and ' (apostrophe), in a string to their corresponding HTML entities.
+function convertHTML(str) {
+ return str.replace(/&/g, '&amp;').replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(/'/g, '&apos;').replace(/"/g, '&quot;');
+
+}
+
+convertHTML('Stuff in "quotation marks"');
+
+
+//function instructions. Given a positive integer num, return the sum of all odd Fibonacci numbers that are less than or equal to num.
+function sumFibs(num) {
+  let sum = 2
+  let prior = 2
+  let current = 1
+  let placeholder = 0
+  while (current < num + 1){
+    if(num == 1){
+      return 1
+    } else if (current == 1){
+      current += 2
+    } else if(current > 1) {
+       if(current % 2 != 0){
+        sum = sum + current
+      }
+      placeholder = current
+      current = current + prior
+      prior = placeholder
+    }
+  }  
+return sum;
+}
+
+sumFibs(75025);
+
+
+// function instructions. A prime number is a whole number greater than 1 with exactly two divisors: 1 and itself. For example, 2 is a prime number because it is only divisible by 1 and 2. In contrast, 4 is not prime since it is divisible by 1, 2 and 4.
+function sumPrimes(num) {
+  let sum = 2
+  while (num > 2){
+    for(let i = num - 1; i > 1; i-- ){
+      if(num % i == 0){
+        num--
+        i = num
+      } else if(i == 2){
+        sum += num
+        num--
+        i = num
+      }
+      
+    }
+    
+  }
+  return sum;
+}
+
+sumPrimes(977);
+
+
+//After reading through the forum on this challange I went back and completed this function 2 ways and I feel like the second is much cleaner. function instructions. Given the array arr, iterate through and remove each element starting from the first element (the 0 index) until the function func returns true when the iterated element is passed through it.
+function dropElements(arr, func) {
+  let count = 0
+  for(let i = 0; i < arr.length; i++){
+    if (func(arr[i]) === false){
+      count = (arr[i]);
+      if(count == 0){
+        count = 1
+      }
+    }   
+  }
+  return arr.slice(count);
+}
+
+dropElements([0, 1, 0, 1], function(n) {return n === 0; });
+
+function dropElements(arr, func) {
+  let times = arr.length
+  for(let i = 0; i < times; i++){
+    if (func(arr[0])){
+      return arr
+      } 
+      arr.shift()
+    }  
+  console.log(arr)
+  return arr;
+}
+
+dropElements([1,2,3,4], function(n) {return n > 5; });
+
+
+
