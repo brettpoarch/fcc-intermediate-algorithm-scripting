@@ -205,6 +205,29 @@ function sumPrimes(num) {
 
 sumPrimes(977);
 
+//function instructions. Find the smallest common multiple of the provided parameters that can be evenly divided by both, as well as by all sequential numbers in the range between these parameters.
+function smallestCommons(arr) {
+  let newArr = [], multiplier = 2
+  arr.sort(function(a,b){
+    return b - a;
+  })
+
+  for(let i = arr[0]; i >=arr[1]; i--){
+    newArr.push(i)
+  }
+ 
+  for (let j = 0; j < newArr.length; j++){
+    if ((newArr[0] * multiplier) % newArr[j] !== 0){
+      multiplier += 1
+      j = 0
+    }
+  }
+
+  return newArr[0] * multiplier 
+}
+
+
+smallestCommons([23,18]);
 
 //After reading through the forum on this challange I went back and completed this function 2 ways and I feel like the second is much cleaner. function instructions. Given the array arr, iterate through and remove each element starting from the first element (the 0 index) until the function func returns true when the iterated element is passed through it.
 function dropElements(arr, func) {
@@ -235,6 +258,74 @@ function dropElements(arr, func) {
 }
 
 dropElements([1,2,3,4], function(n) {return n > 5; });
+
+//function instructions. Flatten a nested array. You must account for varying levels of nesting.
+function steamrollArray(arr) {
+  for (var i = 0; i<=arr.length; i++){
+    if (Array.isArray(arr[i]) === true){
+      arr = arr.reduce(function (a, b){
+        return a.concat(b)
+      },[]); 
+    i=0;
+  }    
+  
+  }
+  //console.log(newArr)
+  console.log(arr)
+  return arr;
+}
+
+steamrollArray([1, [2], [3, [[4]]]]);
+
+
+//function instructions. Return an English translated sentence of the passed binary string.
+function binaryAgent(str) {
+  return str.split(' ').map(function(code){
+      return String.fromCharCode(parseInt(code, 2));
+  }).join('')
+}
+
+//function instructions. Check if the predicate (second argument) is truthy on all elements of a collection (first argument).
+function truthCheck(collection, pre) {
+  let newArr = []
+  for(let i = 0; i < collection.length; i++){
+    if(collection[i][pre]){
+      newArr.push(collection[i][pre])
+    }
+  }
+  if(newArr.length != collection.length){
+    return false
+  }  
+ return true;
+}
+
+truthCheck([{"user": "Tinky-Winky", "sex": NaN}, {"user": "Dipsy", "sex": "male"}, {"user": "Laa-Laa", "sex": "female"}, {"user": "Po", "sex": "female"}], "sex");
+
+
+//function instructions. Create a function that sums two arguments together. If only one argument is provided, then return a function that expects one argument and returns the sum.
+function addTogether() {
+  let args = arguments
+
+  for(let i = 0; i < args.length; i++){
+    if (typeof(args[i]) !== 'number'){
+      return undefined
+    }
+  }
+  
+  if(args.length == 2){
+    return args[0] + args[1]
+  } else if (args.length == 1 && typeof(args[0]) === 'number'){
+    return function(num){
+      if(typeof(num)==='number'){
+        return args[0] + num
+      }
+    } 
+  }
+
+  return false;
+}
+
+addTogether(3)(2);
 
 
 
