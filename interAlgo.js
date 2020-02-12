@@ -116,7 +116,7 @@ pairElement("ATCGA");
 
 //function instructions. Find the missing letter in the passed letter range and return it. If all letters are present in the range, return undefined.
 
-If all letters are present in the range, return undefined.
+//If all letters are present in the range, return undefined.
 function fearNotLetter(str) {
   let num = str.charCodeAt(0)
   for (let i = 0; i < str.length; i++){
@@ -326,6 +326,23 @@ function addTogether() {
 }
 
 addTogether(3)(2);
+
+
+//function instructions. Return a new array that transforms the elements' average altitude into their orbital periods (in seconds).
+function orbitalPeriod(arr) {
+  var GM = 398600.4418;
+  var earthRadius = 6367.4447;
+  
+  for (let i = 0; i < arr.length; i++){
+    arr[i].orbitalPeriod = (Math.round(2 * Math.PI * Math.sqrt(Math.pow(earthRadius + arr[i].avgAlt, 3) / GM)))
+  delete arr[i].avgAlt
+  console.log(arr)
+  
+ } 
+ return arr;
+}
+
+orbitalPeriod([{name: "iss", avgAlt: 413.6}, {name: "hubble", avgAlt: 556.7}, {name: "moon", avgAlt: 378632.553}]);
 
 
 
